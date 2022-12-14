@@ -1,7 +1,8 @@
 import {createElement} from '../render.js';
+import { html } from '../utils.js';
 
 function createTripEventsContainerTemplate() {
-  return ('<ul class="trip-events__list"></ul>');
+  return html `<ul class="trip-events__list"></ul>`;
 }
 
 export default class tripEventsContainerView {
