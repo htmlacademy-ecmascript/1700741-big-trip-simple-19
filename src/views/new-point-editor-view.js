@@ -5,7 +5,7 @@ import PointDestinationView from './common/point-destination-view';
 import PointTimeView from './common/point-time-view';
 import PointPriceView from './common/point-price-view';
 import OffersView from './common/offers-view';
-
+import DestinationView from './common/destination-view';
 
 export default class NewPointEditorView extends View {
   constructor() {
@@ -30,6 +30,7 @@ export default class NewPointEditorView extends View {
       </header>
       <section class="event__details">
         <${OffersView}></${OffersView}>
+        <${DestinationView}></${DestinationView}>
       </section>
     </form>
     `;
