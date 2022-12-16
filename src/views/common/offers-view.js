@@ -1,6 +1,6 @@
 import View from '../views';
 import {html} from '../../utils';
-import './offers-view.js';
+import './offers-view.css';
 
 export default class OffersView extends View {
   constructor() {

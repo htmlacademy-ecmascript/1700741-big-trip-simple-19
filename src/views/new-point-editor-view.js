@@ -25,7 +25,8 @@ export default class NewPointEditorView extends View {
         <${PointDestinationView}></${PointDestinationView}>
         <${PointTimeView}></${PointTimeView}>
         <${PointPriceView}></${PointPriceView}>
-        <button class="event__save-btn  btn  btn--blue" type="submit"></button>
+
+        <button class="event__save-btn  btn  btn--blue" type="submit">Save</button>
         <button class="event__reset-btn" type="reset">Cancel</button>
       </header>
       <section class="event__details">
