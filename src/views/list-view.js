@@ -1,4 +1,4 @@
-import View from './view';
+import View from './views';
 import {html} from '../utils';
 
 export default class ListView extends View {

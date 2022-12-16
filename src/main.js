@@ -2,19 +2,49 @@ import FiltersView from './views/filters-view';
 import NewPointEditorView from './views/new-point-editor-view';
 import PointView from './views/point-view';
 import SortingView from './views/sorting-view';
+import './views/list-view';
+import './views/new-point-editor-view';
+import Store from './store';
 
+const BASE = 'https://19.ecmascript.pages.academy/big-trip-simple/';
+const AUTH = 'Basic qwertyalena';
 
-/*import filtersView from './views/filters-view.js';
-import sortingView from './views/sorting-view.js';
-import tripPresenter from './views/trip-presenter.js';
-import tripPresenter from './trip-presenter.js';
-import helloWorld from './views/hello-world.js';
+/**
+ * @type {Store<Point>}
+ */
+const pointsStore = new Store(`${BASE}/points`, AUTH);
 
-const siteHeaderElement = document.querySelector('.trip-controls__filters');
-const siteMainElement = document.querySelector('.trip-events');
-const tripPresenter = new tripPresenter({pageContainer: siteMainElement});
+/**
+ * @type {Store<Destination>}
+ */
+const destinationsStore = new Store(`${BASE}/destinations`, AUTH);
 
-render(new filtersView(), siteHeaderElement);
-render(new sortingView(), siteMainElement);
+/**
+ * @type {Store<Offer>}
+ */
+const offersStore = new Store(`${BASE}/offers`, AUTH);
 
-tripPresenter.init();*/
+pointsStore.list().then(async (items) => {
+  const {log} = console;
+
+  log('Points: List', items);
+
+  const date = new Date().toJSON();
+  const item = await pointsStore.add({
+    'base_price': 100,
+    'date_from': date,
+    'date_to': date,
+    'destination': 1,
+    'offers': [],
+    'type': 'bus'
+  });
+
+  log('Points: Add', item);
+
+  item['base_price'] = 200;
+  log('Points: Update', await pointsStore.update(item));
+
+  log('Points: Delete', await pointsStore.delete(item.id));
+  log('Destinations: List', await destinationsStore.list());
+  log('Offers: List', await offersStore.list());
+});
