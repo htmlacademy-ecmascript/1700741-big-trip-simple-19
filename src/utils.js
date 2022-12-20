@@ -15,19 +15,19 @@ export const html = (strings, ...values) => strings.reduce((before, after, index
 /**
  * @param {string} value
  */
-export formatDate = (value) => dayjs(value).format('MMM - DD');
+export const formatDate = (value) => dayjs(value).format('MMM - DD');
 
 
 /**
  * @param {string} value
  */
 
-export formatTime = (value) => dayjs(value).format('HH:mm');
+export const formatTime = (value) => dayjs(value).format('HH:mm');
 
 /**
  * @param {number} value
  */
 
-export formatNumber = (value) => value.toLocateString('en');
+export const formatNumber = (value) => value.toLocaleString('en');
 
 

@@ -11,10 +11,10 @@ export default class ListPresenter extends Presenter {
     console.log('123');
   }
 
-   updateView() {
+  uppdateView() {
     this.view.setItems(
-      this.pointsModel.list().map(this.createPointViewState, this);
-    )
+      this.pointsModel.list().map(this.createPointViewState, this)
+    );
   }
 
   /**
