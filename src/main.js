@@ -2,9 +2,20 @@ import FiltersView from './views/filters-view';
 import NewPointEditorView from './views/new-point-editor-view';
 import PointView from './views/point-view';
 import SortingView from './views/sorting-view';
-import './views/list-view';
+import ListView from './views/list-view';
 import './views/new-point-editor-view';
+
 import Store from './store';
+
+import CollectionModel from './models/collection-model';
+
+import PointAdaptor from './adapters/point-adapter';
+import DestinationAdaptor from './adapters/destination-adapter';
+import OfferGroupAdaptor from './adapters/offer-group-adapter';
+
+import { FilterType, SortType } from './enums';
+import { filterCallbackMap, sortCallbackMap } from './maps';
+import ListPresenter from './presenters/list-presentor';
 
 const BASE = 'https://19.ecmascript.pages.academy/big-trip-simple/';
 const AUTH = 'Basic qwertyalena';
@@ -13,38 +24,44 @@ const AUTH = 'Basic qwertyalena';
  * @type {Store<Point>}
  */
 const pointsStore = new Store(`${BASE}/points`, AUTH);
+const pointsModel = new CollectionModel({
+  store: pointsStore,
+  adapt: (item) => new PointAdaptor(item),
+  filter: filterCallbackMap[FilterType.FUTURE],
+  sort: sortCallbackMap[SortType.DAY, SortType.PRICE]
+});
 
 /**
  * @type {Store<Destination>}
  */
 const destinationsStore = new Store(`${BASE}/destinations`, AUTH);
+const destinationsModel = new CollectionModel({
+  store: destinationsStore,
+  adapt: (item) => new DestinationAdaptor(item)
+});
 
 /**
- * @type {Store<Offer>}
+ * @type {Store<OfferGroup>}
  */
-const offersStore = new Store(`${BASE}/offers`, AUTH);
+const offersGroupsStore = new Store(`${BASE}/offers`, AUTH);
+const offerGroupsModel = new CollectionModel({
+  store: offersGroupsStore,
+  adapt: (item) => new OfferGroupAdaptor(item)
+});
 
-pointsStore.list().then(async (items) => {
-  const {log} = console;
+const models = [pointsModel, destinationsModel, offerGroupsModel];
 
-  log('Points: List', items);
+const listView = document.querySelector(String(ListView));
 
-  const date = new Date().toJSON();
-  const item = await pointsStore.add({
-    'base_price': 100,
-    'date_from': date,
-    'date_to': date,
-    'destination': 1,
-    'offers': [],
-    'type': 'bus'
+Promise.all(
+  models.map((model) => model.ready())
+)
+  .then(async () => {
+    new ListPresenter(listView, models);
+  })
+
+  .catch((error) => {
+    log(error);
   });
 
-  log('Points: Add', item);
 
-  item['base_price'] = 200;
-  log('Points: Update', await pointsStore.update(item));
-
-  log('Points: Delete', await pointsStore.delete(item.id));
-  log('Destinations: List', await destinationsStore.list());
-  log('Offers: List', await offersStore.list());
-});

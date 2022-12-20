@@ -2,7 +2,7 @@ import Adapter from './adapter';
 
 export default class DestinationAdaptor extends Adapter {
   /**
-   * @param {Partial<Destination>} data;
+   * @param {Destination} data;
    */
   constructor(data) {
     super();
@@ -13,6 +13,8 @@ export default class DestinationAdaptor extends Adapter {
     this.pictures = data.pictures?.map((item) => ({...item}));
   }
 
+
+  //СКОРЕЕ ВСЕГО НЕ НАДО
   /**
    * @override
    * @return {Partial<Destination>}
@@ -25,4 +27,5 @@ export default class DestinationAdaptor extends Adapter {
       'pictures': this.pictures.map((item) => ({...item}))
     };
   }
+  //КОНЕЦ НЕНУЖНОГО РАЗДЕЛА
 }
