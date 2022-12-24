@@ -1,4 +1,5 @@
 import Model from './model';
+
 /**
  * @template Item
  * @template {Adapter} ItemAdapter
@@ -42,6 +43,7 @@ export default class CollectionModel extends Model {
    */
   setFilter(filter, notify = true) {
     this.#filter = filter;
+
     if (notify) {
       this.dispatchEvent(new CustomEvent('filter'));
     }
@@ -57,6 +59,7 @@ export default class CollectionModel extends Model {
    */
   setSort(sort, notify = true) {
     this.#sort = sort;
+
     if (notify) {
       this.dispatchEvent(new CustomEvent('sort'));
     }
@@ -139,7 +142,7 @@ export default class CollectionModel extends Model {
   async update(item) {
     const newItem = await this.#store.update(item.toJSON());
     const index = this.findIndexById(item.id);
-    const detail = {newItem: this.#adapt(newItem), oldItem: this.item[index]};
+    const detail = {newItem: this.#adapt(newItem), oldItem: this.item(index)};
 
     this.#items.splice(index, 1, newItem);
     this.dispatchEvent(new CustomEvent('update', {detail}));
@@ -157,8 +160,8 @@ export default class CollectionModel extends Model {
     this.#items.splice(index, 1);
     const detail = this.item(index);
 
-    this.dispatchEvent(new CustomEvent('delete', ({detail})));
-    return detail;
+    this.dispatchEvent(new CustomEvent('delete', {detail}));
 
+    return detail;
   }
 }

@@ -1,5 +1,5 @@
-import View from './views';
 import PointView from './point-view';
+import View from './view';
 
 export default class ListView extends View {
   /**
@@ -7,6 +7,7 @@ export default class ListView extends View {
    */
   setItems(states) {
     const views = states.map((state) => new PointView(state));
+
     this.replaceChildren(...views);
   }
 }
