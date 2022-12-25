@@ -11,7 +11,7 @@ export default class ListPresenter extends Presenter {
 
     this.updateView();
     this.pointsModel.addEventListener('filter', this.handlePointsModelFilter.bind(this));
-    console.log('123');
+
   }
 
   updateView() {
@@ -40,12 +40,11 @@ export default class ListPresenter extends Presenter {
       icon: pointIconMap[point.type],
       title: `${pointTitleMap[point.type]} ${destination.name}`,
       offers: offerViewStates,
-      startTime: formatTime(point.startDate),
-      endTime: formatTime(point.endDate),
-      basePrice: formatNumber(point.basePrice),
-
       startDate: point.startDate,
-      endDate: point.endDate
+      startTime: formatTime(point.startDate),
+      endDate: (point.endDate),
+      endTime: formatTime(point.endDate),
+      basePrice: formatNumber(point.basePrice)
     };
   }
 
