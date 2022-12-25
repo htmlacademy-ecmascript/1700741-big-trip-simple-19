@@ -1,10 +1,10 @@
-import Adapter from "./adapter";
+import Adapter from './adapter';
 
-export default class PointAdaptor extends Adapter {
+export default class PointAdapter extends Adapter {
   /**
-   * @param {Partial<Point>} data;
+   * @param {Partial<Point>} data
    */
-  constructor(data = {}, ) {
+  constructor(data = {}) {
     super();
 
     this.basePrice = data.base_price;
@@ -12,9 +12,20 @@ export default class PointAdaptor extends Adapter {
     this.endDate = data.date_to;
     this.destinationId = String(data.destination);
     this.id = data.id;
-    this.offersIds = data.offers?.map(String);
+    this.offerIds = data.offers?.map(String);
     this.type = data.type;
   }
+
+  get startDateAsNumber() {
+
+    return Date.parse(this.startDate);
+
+  }
+
+  get endDateAsNumber() {
+    return Date.parse(this.endDate);
+  }
+
 
   /**
    * @override
@@ -27,7 +38,7 @@ export default class PointAdaptor extends Adapter {
       'date_to': this.endDate,
       'destination': Number(this.destinationId),
       'id': this.id,
-      'offers': this.offersIds?.map(Number),
+      'offers': this.offerIds?.map(Number),
       'type': this.type
     };
   }
