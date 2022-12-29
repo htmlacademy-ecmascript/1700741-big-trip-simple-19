@@ -1,10 +1,5 @@
 import { FilterType, SortType, PointType} from './enums';
 
-export const filterTitleMap = {
-  [FilterType.EVERYTHING]: 'Everything',
-  [FilterType.FUTURE]: 'Future'
-};
-
 export const sortTitleMap = {
   [SortType.DAY]: 'Day',
   [SortType.EVENT]: 'Event',
@@ -19,6 +14,11 @@ export const sortDisabilityMap = {
   [SortType.TIME]: true,
   [SortType.PRICE]: false,
   [SortType.OFFERS]: true
+};
+
+export const filterTitleMap = {
+  [FilterType.EVERYTHING]: 'Everything',
+  [FilterType.FUTURE]: 'Future'
 };
 
 /**
