@@ -1,4 +1,3 @@
-import { FilterType } from '../enums';
 import { filterCallbackMap, filterTitleMap } from '../maps';
 import { findKey } from '../utils';
 import Presenter from './presenter';
@@ -15,9 +14,6 @@ export default class FilterPresenter extends Presenter {
     this.view.setOptions(options);
     this.updateViewValue();
     this.view.addEventListener('change', this.handleViewChange.bind(this));
-
-    // this.pointsModel.addEventListener('filter', this.handlePointsModelFilter.bind(this));
-
   }
 
   updateViewValue() {

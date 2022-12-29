@@ -103,5 +103,7 @@
 
 /**
  * @typedef {import('./views/filters-view').default} FilterView
+ * @typedef {import('./views/sorting-view').default} sortView
  * @typedef {import('./views/list-view').default} ListView
+ * @typedef {import('./views/new-point-editor-view').default} NewPointEditorView
  */
