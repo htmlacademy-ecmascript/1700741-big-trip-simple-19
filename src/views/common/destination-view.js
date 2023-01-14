@@ -5,28 +5,85 @@ export default class DestinationView extends View {
   constructor() {
     super();
 
-    this.classList.add('event__section', 'event__section--destination');
+    this.classList.add('event__field-group', 'event__field-group--destination');
   }
 
   /**
    * @override
+   * Сделали разметку для блока Дестинэшн
    */
   createHtml() {
     return html`
-    <h3 class="event__section-title  event__section-title--destination">Destination</h3>
-    <p class="event__destination-description">Chamonix-Mont-Blanc (usually shortened to Chamonix) is a resort area near the junction of France, Switzerland and Italy. At the base of Mont Blanc, the highest summit in the Alps, it's renowned for its skiing.</p>
-
-    <div class="event__photos-container">
-      <div class="event__photos-tape">
-        <img class="event__photo" src="img/photos/1.jpg" alt="Event photo">
-        <img class="event__photo" src="img/photos/2.jpg" alt="Event photo">
-        <img class="event__photo" src="img/photos/3.jpg" alt="Event photo">
-        <img class="event__photo" src="img/photos/4.jpg" alt="Event photo">
-        <img class="event__photo" src="img/photos/5.jpg" alt="Event photo">
-      </div>
-    </div>
+      <label class="event__label  event__type-output" for="event-destination-1"></label>
+      <input class="event__input  event__input--destination" id="event-destination-1" type="text" name="event-destination" list="destination-list-1">
+      <datalist id="destination-list-1"></datalist>
     `;
   }
+
+  /**
+   * @param {OptionViewState} state
+   * Добавили разметку разные города назначения
+   */
+  createOptionHtml(state) {
+    return html`
+      <option value="${state.value}">${state.value}
+      </option>
+    `;
+  }
+
+  /**
+   * @param {Picture} state
+   * сделали разметку для каждой картинки пункта назначения
+   */
+  createPicrureHtml(state) {
+    return html`
+      <img
+        class="event__photo"
+        src="${state.src}"
+        alt="${state.description}">
+    `;
+  }
+
+  /**
+   * @param {DestinationAdapter} state
+   * Добавили разметку разные картинки к пункту назначения
+   */
+  setContent(state) {
+    const picturesHtml = state.pictures.map(this.createPicrureHtml).join('');
+
+    this.querySelector('.event__photos-tape').innerHTML = picturesHtml;
+    this.querySelector('.event__destination-description').textContent = state.description;
+  }
+
+  /**
+   * @param {OptionViewState[]} states
+   * Соединили все города в список и добавили в выбор городов
+   */
+  setOptions(states) {
+    const optionsHtml = states.map(this.createOptionHtml).join('');
+    this.querySelector('datalist'). insertAdjacentHTML('beforeend', optionsHtml);
+
+  }
+
+
+  setValue(value) {
+    this.querySelector('input').value = value;
+  }
+
+  getValue() {
+    return this.querySelector('input').value;
+  }
+
+
+  /**
+  * @param {string} label
+  */
+
+  setLabel(label) {
+    this.querySelector('label').textContent = label;
+  }
+
+
 }
 
 customElements.define(String(DestinationView), DestinationView);

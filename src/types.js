@@ -93,6 +93,14 @@
  * @typedef OfferViewState
  * @prop {string} title
  * @prop {string} price
+  */
+
+/**
+ * @typedef OfferToggleViewState
+ * @prop {string} id
+ * @prop {string} title
+ * @prop {string} price
+ * @prop {boolean} checked
  */
 
 /**
@@ -106,4 +114,12 @@
  * @typedef {import('./views/sorting-view').default} sortView
  * @typedef {import('./views/list-view').default} ListView
  * @typedef {import('./views/new-point-editor-view').default} NewPointEditorView
+ */
+
+/**
+ * @typedef OfferToggleViewState
+ * @prop {string} id
+ * @prop {string} title
+ * @prop {string} price
+ * @prop {boolean} checked
  */

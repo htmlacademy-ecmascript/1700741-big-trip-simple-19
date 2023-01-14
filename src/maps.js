@@ -1,5 +1,8 @@
 import { FilterType, SortType, PointType} from './enums';
 
+/**
+ * Виды сортировки
+ */
 export const sortTitleMap = {
   [SortType.DAY]: 'Day',
   [SortType.EVENT]: 'Event',
@@ -8,6 +11,9 @@ export const sortTitleMap = {
   [SortType.OFFERS]: 'Offers'
 };
 
+/**
+ * Данные, можно ли сортировать по данному признаку (тру - сортировка недоступна)
+ */
 export const sortDisabilityMap = {
   [SortType.DAY]: false,
   [SortType.EVENT]: true,
@@ -16,6 +22,9 @@ export const sortDisabilityMap = {
   [SortType.OFFERS]: true
 };
 
+/**
+ * Виды фильтров
+ */
 export const filterTitleMap = {
   [FilterType.EVERYTHING]: 'Everything',
   [FilterType.FUTURE]: 'Future'
@@ -23,6 +32,7 @@ export const filterTitleMap = {
 
 /**
  * @type {Record<string,FilterCallback<PointAdapter>>}
+ * Способы фильтрации по виду фильтра
  */
 export const filterCallbackMap = {
   [FilterType.EVERYTHING]: () => true,
@@ -31,6 +41,7 @@ export const filterCallbackMap = {
 
 /**
  * @type {Record<string,SortCallback<PointAdapter>>}
+ * способы сортировки по видам фильтра
  */
 export const sortCallbackMap = {
   [SortType.DAY]: (point, nextPoint) => point.startDateAsNumber - nextPoint.endDateAsNumber,
@@ -40,6 +51,9 @@ export const sortCallbackMap = {
   [SortType.OFFERS]: () => 0
 };
 
+/**
+ * виды транспорта
+ */
 export const pointTitleMap = {
   [PointType.TAXI]: 'Taxi',
   [PointType.BUS]: 'Bus',
@@ -52,4 +66,7 @@ export const pointTitleMap = {
   [PointType.RESTAURANT]: 'Restaurant'
 };
 
+/**
+ * иконки к транспорту
+ */
 export const pointIconMap = Object.fromEntries(Object.values(PointType).map((value) => [value, `img/icons/${value}.png`]));
