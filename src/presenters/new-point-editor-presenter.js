@@ -18,7 +18,7 @@ export default class NewPointEditorPresenter extends Presenter {
     /** Сделали список транспорта и сформировали из него список в поле выбора транспорта*/
     this.view.pointTypeView.setOptions(pointTypeOptions);
 
-    /**Добавили слушатель на изменения вьюшки типа кнопки*/
+    /**Добавили слушатель на изменения вьюшки типа траспорта*/
     this.view.pointTypeView.addEventListener('change', this.handlePointTypeViewChange.bind(this));
 
     /** Установили значение по умолчанию */
@@ -31,7 +31,6 @@ export default class NewPointEditorPresenter extends Presenter {
 
     //** Составили список ??????*/
     this.view.destinationView.setOptions(destinationOptions);
-
     this.view.destinationView.addEventListener('input', this.handleDestinationViewInput.bind(this));
 
     this.view.addEventListener('submit', this.handleViewSubmit.bind(this));
@@ -58,7 +57,7 @@ export default class NewPointEditorPresenter extends Presenter {
    * @param {string[]} offerIds
    */
   updateOffersView(offerIds = []) {
-    /** TODO перерисовка офера */
+    /** перерисовка офера*/
     const pointType = this.view.pointTypeView.getValue();
     const offerGroup = this.offerGroupsModel.findById(pointType);
     const options = offerGroup.items.map((offer) => ({
@@ -69,8 +68,6 @@ export default class NewPointEditorPresenter extends Presenter {
 
     this.view.offersView.setOptions(options);
     this.view.offersView.hidden = !options.length;
-    /** ADD 12/14 */
-
   }
 
   /**
@@ -80,7 +77,7 @@ export default class NewPointEditorPresenter extends Presenter {
     this.view.destinationDetailsView.hidden = !destination;
 
     if (destination) {
-      this.view.destinationView.setContent(destination);
+      this.view.destinationDetailsView.setContent(destination);
     }
   }
 
@@ -92,7 +89,7 @@ export default class NewPointEditorPresenter extends Presenter {
 
       const point = this.pointsModel.item();
 
-      point.type = PointType.FLIGHT;
+      point.type = PointType.BUS;
       point.destinationId = this.destinationsModel.item(0).id;
       point.startDate = (new Date()).toJSON();
       point.endDate = point.startDate;

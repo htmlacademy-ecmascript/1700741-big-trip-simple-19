@@ -1,4 +1,4 @@
-import { FilterType, SortType, PointType} from './enums';
+import { FilterType, SortType, PointType, ButtonState} from './enums';
 
 /**
  * Виды сортировки
@@ -70,3 +70,9 @@ export const pointTitleMap = {
  * иконки к транспорту
  */
 export const pointIconMap = Object.fromEntries(Object.values(PointType).map((value) => [value, `img/icons/${value}.png`]));
+
+export const saveButtonTextMap = {
+  [ButtonState.DEFAULT]: 'Save',
+  [ButtonState.PRESSED]: 'Saving...'
+};
+

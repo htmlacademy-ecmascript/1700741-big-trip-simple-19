@@ -27,5 +27,6 @@ export default class FilterPresenter extends Presenter {
     const filterType = this.view.getValue();
     this.pointsModel.setFilter(filterCallbackMap[filterType]);
 
+    this.navigate('/');
   }
 }

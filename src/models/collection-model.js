@@ -77,6 +77,8 @@ export default class CollectionModel extends Model {
     return this.listAll().filter(filter).sort(sort);
   }
 
+
+  /*переделали пункты в адаптированные пункты */
   listAll() {
     return this.#items.map(this.#adapt);
   }

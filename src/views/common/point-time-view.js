@@ -20,6 +20,15 @@ export default class PointTimeView extends View {
       <input class="event__input  event__input--time" id="event-end-time-1" type="text" name="event-end-time" value="18/03/19 13:35">
     `;
   }
+
+  /**TODO */
+
+  handleKeydown(event) {
+    if (event.key === 'Escape' && (this.#startDateCalendar.isOpen || this.#endDateCalendar.isOpen)) {
+      event.stopImmediate
+    }
+    /**TODO */
+  }
 }
 
 customElements.define(String(PointTimeView), PointTimeView);

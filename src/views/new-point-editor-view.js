@@ -6,6 +6,7 @@ import PointPriceView from './common/point-price-view';
 import OffersView from './common/offers-view';
 import DestinationView from './common/destination-view';
 import DestinationDetailsView from './common/destination-detail-view';
+import { saveButtonTextMap } from '../maps';
 
 /**
  * @implements {EventListenerObject}
@@ -78,6 +79,15 @@ export default class NewPointEditorView extends View {
     if (notify) {
       this.dispatchEvent(new CustomEvent('close'));
     }
+  }
+
+  /**
+   * @param {Boolean} flag
+   */
+  awaitSave(flag) {
+    const text = saveButtonTextMap[Number(flag)];
+
+    this.querySelector('.event__save-btn').textContent = text;
   }
 
   /**
