@@ -2,6 +2,13 @@ import View from '../views';
 import {html} from '../../utils';
 
 export default class PointTimeView extends View {
+
+  /**
+   * @type {Calendar}
+   */
+  #startDateCalendar;
+
+
   constructor() {
     super();
 
@@ -19,6 +26,32 @@ export default class PointTimeView extends View {
       <label class="visually-hidden" for="event-end-time-1">To</label>
       <input class="event__input  event__input--time" id="event-end-time-1" type="text" name="event-end-time" value="18/03/19 13:35">
     `;
+  }
+
+  /**
+   *
+   * @param {CalendarConfig} config
+   */
+  setConfig(config) {
+    const defaultConfig = {
+      allowInput: true,
+      enableTime: true,
+      monthSelectorType: 'static'
+    };
+
+    //@ts-ignore
+    this.#startDateConfig = {
+      onChange: ([value] => this.#endDateCalendar.set('minDate', value)),
+      ...defaultConfig,
+      ...config
+    }
+  }
+
+  handleKeydown(event) {
+    if (event.key === 'Escape' && (this.#startDateCalendar.isOpen || this.#endDateCalendar.isOpen)) {
+      event.stopImmediate
+    }
+    /**TODO */
   }
 }
 

@@ -1,8 +1,14 @@
+/**
+ * виды фильтров
+ */
 export const FilterType = {
   EVERYTHING: 'everything',
   FUTURE: 'future'
 };
 
+/**
+ * виды сортировки
+ */
 export const SortType = {
   DAY: 'day',
   EVENT: 'event',
@@ -11,6 +17,9 @@ export const SortType = {
   OFFERS: 'offers'
 };
 
+/**
+ * виды транспорта
+ */
 export const PointType = {
   TAXI: 'taxi',
   BUS: 'bus',
@@ -22,3 +31,9 @@ export const PointType = {
   SIGHTSEEING: 'sightseeing',
   RESTAURANT: 'restaurant'
 };
+
+export const ButtonState = {
+  DEFAULT: 0,
+  PRESSED: 1,
+
+}
