@@ -1,3 +1,5 @@
+import './common/abstract-view';
+
 export default class View extends HTMLElement {
   constructor() {
     super();
@@ -9,6 +11,14 @@ export default class View extends HTMLElement {
     void arguments;
 
     return '';
+  }
+
+  shake() {
+    this.classList.add('shake');
+
+    this.addEventListener('animationend', () => {
+      this.classList.remove('shake');
+    }, {once: true});
   }
 
   static get localName() {

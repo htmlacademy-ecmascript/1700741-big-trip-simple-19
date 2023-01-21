@@ -123,3 +123,7 @@
  * @prop {string} price
  * @prop {boolean} checked
  */
+
+/**
+ *
+ */

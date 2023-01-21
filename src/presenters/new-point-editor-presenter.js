@@ -1,7 +1,10 @@
 import { PointType } from '../enums';
 import { pointTitleMap } from '../maps';
 import { formatNumber } from '../utils';
+import View from '../views/views';
 import Presenter from './presenter';
+import {UiBlockerView.js} from './';
+import PointTimeView from '../views/common/point-time-view';
 
 /**
  * @extends {Presenter<NewPointEditorView>}
@@ -32,6 +35,15 @@ export default class NewPointEditorPresenter extends Presenter {
     //** Составили список ??????*/
     this.view.destinationView.setOptions(destinationOptions);
     this.view.destinationView.addEventListener('input', this.handleDestinationViewInput.bind(this));
+
+    this.view.pointTimeView.setConfig({
+      dateformat: 'd/m/y H:m',
+
+      locale: {
+        'time_24hr': true,
+        firstDayWeek: 1
+      }
+    })
 
     this.view.addEventListener('submit', this.handleViewSubmit.bind(this));
     this.view.addEventListener('reset', this.handleViewReset.bind(this));
@@ -107,8 +119,21 @@ export default class NewPointEditorPresenter extends Presenter {
   /**
    * @param {SubmitEvent} event
    */
-  handleViewSubmit(event) {
+  async handleViewSubmit(event) {
     event.preventDefault();
+
+    this.view.awaitSave(true);
+
+    try {
+
+    }
+
+    catch(exception) {
+      console.log(exception);
+      this.view.shake();
+    }
+
+    this.view.awaitSave(false);
   }
 
   handleViewReset() {

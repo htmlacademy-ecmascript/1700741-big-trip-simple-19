@@ -7,6 +7,7 @@ import OffersView from './common/offers-view';
 import DestinationView from './common/destination-view';
 import DestinationDetailsView from './common/destination-detail-view';
 import { saveButtonTextMap } from '../maps';
+import UiBlockerView from './ui-blocker-view';
 
 /**
  * @implements {EventListenerObject}
@@ -81,6 +82,7 @@ export default class NewPointEditorView extends View {
     }
   }
 
+
   /**
    * @param {Boolean} flag
    */
@@ -88,6 +90,8 @@ export default class NewPointEditorView extends View {
     const text = saveButtonTextMap[Number(flag)];
 
     this.querySelector('.event__save-btn').textContent = text;
+
+    this.uiBlockerView.toogle(flag);
   }
 
   /**
